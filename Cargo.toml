@@ -1,0 +1,38 @@
+[package]
+name = "sol-stake"
+version = "0.1.0"
+edition = "2021"
+
+[features] 
+no-entrypoint = [] 
+test-bpf = []
+
+[dependencies]
+borsh = "0.9.3"
+borsh-derive = "0.9.3"
+solana-program = "1.14.5"
+thiserror = "1.0.37"
+
+[dev-dependencies] 
+solana-logger = "1.14.5"
+solana-program-test = "1.14.5"
+solana-sdk = "1.14.5"
+solana-validator = "1.14.5"
+
+[profile.release]
+codegen-units = 1
+
+# Tell `rustc` to optimize for small code size.
+opt-level = "z"
+
+lto = true
+debug = false
+panic = "abort"
+
+# Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
+overflow-checks = true
+
+[lib]
+name = "stakingapp"
+crate-type = ["cdylib", "lib"]
+
